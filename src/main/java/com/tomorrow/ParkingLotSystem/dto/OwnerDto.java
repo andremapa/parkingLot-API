@@ -14,14 +14,14 @@ public class OwnerDto implements Serializable {
     private String cpf;
     private String phone;
 
-    private List<Vehicle> vehicleList;
+    private List<VehicleDto> vehicleList;
 
     public OwnerDto(Owner owner) {
         this.name = owner.getName();
         this.email = owner.getEmail();
         this.cpf = owner.getCpf();
         this.phone = owner.getPhone();
-        this.vehicleList = owner.getVehicleList();
+        this.vehicleList = converterVehicle(owner.getVehicleList());
     }
 
     public String getName() {
@@ -40,11 +40,15 @@ public class OwnerDto implements Serializable {
         return phone;
     }
 
-    public List<Vehicle> getVehicleList(){
+    public List<VehicleDto> getVehicleList(){
         return vehicleList;
     }
 
-    public static List<OwnerDto> converter(List<Owner> ownerList){
+    public static List<OwnerDto> converterOwner(List<Owner> ownerList){
         return ownerList.stream().map(OwnerDto::new).collect(Collectors.toList());
+    }
+
+    private static List<VehicleDto> converterVehicle(List<Vehicle> vehicleList){
+        return vehicleList.stream().map(VehicleDto::new).collect(Collectors.toList());
     }
 }

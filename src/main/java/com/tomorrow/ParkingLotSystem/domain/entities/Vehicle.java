@@ -1,5 +1,7 @@
 package com.tomorrow.ParkingLotSystem.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -20,22 +22,26 @@ public class Vehicle implements Serializable {
     private String model;
     @NotBlank
     private String brand;
-    @ManyToOne
-    @JoinColumn(name = "owner_uuid")
-    private Owner owner;
 
-    public Owner getOwner() {
-        return owner;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "owner_uuid")
+    private Owner ownerVehicle;
+
+    private String ownerCpf;
+
+    public Owner getOwnerVehicle() {
+        return ownerVehicle;
     }
 
     public Vehicle() {
     }
 
-    public Vehicle(String plate, String model, String brand, Owner owner) {
+    public Vehicle(String plate, String model, String brand, String cpf) {
         this.plate = plate;
         this.model = model;
         this.brand = brand;
-        this.owner = owner;
+        this.ownerCpf = cpf;
     }
 
     public UUID getUuid() {
@@ -52,5 +58,14 @@ public class Vehicle implements Serializable {
 
     public String getBrand() {
         return brand;
+    }
+
+    public String getOwnerCpf() {
+        return ownerCpf;
+    }
+
+    public Vehicle setOwnerVehicle(Owner ownerVehicle) {
+        this.ownerVehicle = ownerVehicle;
+        return this;
     }
 }

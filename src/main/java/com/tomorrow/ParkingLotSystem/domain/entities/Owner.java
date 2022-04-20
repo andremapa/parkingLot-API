@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,8 +29,8 @@ public class Owner implements Serializable {
     @NotBlank
     @Pattern(regexp = "^\\([1-9]{2}\\) (?:[2-8]|9[1-9])\\d{3}-\\d{4}$")
     private String phone;
-    @OneToMany
-    private List<Vehicle> vehicleList;
+    @OneToMany(mappedBy = "ownerVehicle")
+    private List<Vehicle> vehicleList = new ArrayList<>();
 
     public Owner(){}
 
@@ -59,6 +60,7 @@ public class Owner implements Serializable {
     public String getPhone() {
         return phone;
     }
+
     public List<Vehicle> getVehicleList() {
         return vehicleList;
     }

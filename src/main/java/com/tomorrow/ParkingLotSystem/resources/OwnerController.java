@@ -23,7 +23,7 @@ public class OwnerController {
     @GetMapping
     public ResponseEntity<List<OwnerDto>> getAll(){
         List<Owner> ownerList = service.findAll();
-        return ResponseEntity.ok(OwnerDto.converter(ownerList));
+        return ResponseEntity.ok(OwnerDto.converterOwner(ownerList));
     }
 
     @GetMapping("/filter")

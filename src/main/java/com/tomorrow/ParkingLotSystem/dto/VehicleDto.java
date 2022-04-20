@@ -11,13 +11,11 @@ public class VehicleDto {
     private String plate;
     private String model;
     private String brand;
-    private Owner owner;
 
     public VehicleDto(Vehicle vehicle) {
         this.plate = vehicle.getPlate();
         this.model = vehicle.getModel();
         this.brand = vehicle.getBrand();
-        this.owner = vehicle.getOwner();
     }
 
     public String getPlate() {
@@ -30,10 +28,6 @@ public class VehicleDto {
 
     public String getBrand() {
         return brand;
-    }
-
-    public Owner getOwner() {
-        return owner;
     }
 
     public static List<VehicleDto> converter(List<Vehicle> vehicleList){
